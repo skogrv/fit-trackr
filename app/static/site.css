@@ -20,7 +20,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px;
+    padding: 1em;
     background-color: #5B8FB9;
     color: #fff;
 }
@@ -31,14 +31,14 @@ li {
 
 /* LOGO */
 .logo {
-    font-size: 32px;
+    font-size: 2em;
 }
 
 /* NAVBAR MENU */
 .menu {
     display: flex;
     gap: 1em;
-    font-size: 18px;
+    font-size: 1.2em;
 }
 
 .menu li:hover {
@@ -48,12 +48,23 @@ li {
 }
 
 .menu li {
+    display: flex;
+    align-items: center;
     padding: 5px 14px;
 }
 
 .main-content {
-    height: calc(100vh - 77px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 67px);
     background-color: #B6EADA;
+}
+
+.main-text {
+    font-family: 'Open Sans', sans-serif;
+    padding: 30px;
+    font-size: 50px;
 }
 
 

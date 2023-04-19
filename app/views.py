@@ -8,12 +8,11 @@ from . import app
 def home():
     return render_template("home.html")
 
-# New functions
-@app.route("/about/")
+@app.route("/login")
 def about():
     return render_template("about.html")
 
-@app.route("/contact/")
+@app.route("/signup")
 def contact():
     return render_template("contact.html")
 
