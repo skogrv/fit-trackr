@@ -9,12 +9,12 @@ def home():
     return render_template("home.html")
 
 @app.route("/login")
-def about():
-    return render_template("about.html")
+def login():
+    return render_template("login.html")
 
 @app.route("/signup")
-def contact():
-    return render_template("contact.html")
+def signup():
+    return render_template("signup.html")
 
 
 @app.route("/hello/")
