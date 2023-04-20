@@ -11,10 +11,10 @@ from app import views
 from .auth import routes
 app.register_blueprint(auth.routes.auth_bp)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-# app.config.from_object(config("APP_SETTINGS"))
-# bcrypt = Bcrypt(app)
-# db = SQLAlchemy(app)
-# migrate = Migrate(app, db)
+app.config.from_object(config("APP_SETTINGS"))
+bcrypt = Bcrypt(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
