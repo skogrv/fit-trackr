@@ -13,13 +13,13 @@ def index():
 def login():
     return render_template("login.html")
 
-@app.route("/signup", methods=("GET", "POST"))
-def signup():
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        flash("Registered")
-        return redirect("/home")
-    return render_template("signup.html", form=form)
+# @app.route("/signup", methods=("GET", "POST"))
+# def signup():
+#     form = RegistrationForm()
+#     if form.validate_on_submit():
+#         flash("Registered")
+#         return redirect("/home")
+#     return render_template("signup.html", form=form)
 
 @app.route("/home")
 def home():
