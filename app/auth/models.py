@@ -16,3 +16,6 @@ class User(UserMixin, db.Model):
         self.username = username
         self.password = bcrypt.generate_password_hash(password)
         self.created_on = datetime.now()
+
+    def __repr__(self):
+        return f"<username {self.username}>"
