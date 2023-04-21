@@ -14,7 +14,7 @@ class RegistrationForm(FlaskForm):
     confirm = PasswordField('Repeat Password', validators=[
                             DataRequired(), EqualTo("password", message="Passwords must match")])
 
-    def validate(self):
+    def validate(self, extra_validators=None):
         initial_validation = super(RegistrationForm, self).validate()
         if not initial_validation:
             return False

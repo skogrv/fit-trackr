@@ -4,7 +4,7 @@ Login
 {% endblock %}
 {% block content %}
 <div class="login-form">
-    <form action="/examples/actions/confirmation.php" method="post">
+    <form action="/login" method="post">
         {{ form.csrf_token }}
         <h2 class="text-center">Log in</h2>
         {% for field, errors in form.errors.items() %}
@@ -13,10 +13,10 @@ Login
             {% endfor %}
         {% endfor %}
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Username" required="required">
+            {{ form.username(class="form-control", placeholder="Username") }}
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" placeholder="Password" required="required">
+            {{ form.password(class="form-control", placeholder="Password") }}
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary btn-block">Log in</button>
@@ -26,6 +26,6 @@ Login
             <a href="#" class="pull-right">Forgot Password?</a>
         </div>
     </form>
-    <p class="text-center"><a href="{{ url_for('auth_bp.signup') }}">Create an Account</a></p>
+    <p class="text-center"><a href="{{ url_for('auth.signup') }}">Create an Account</a></p>
 </div>
 {% endblock %}
