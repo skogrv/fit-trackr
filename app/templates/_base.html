@@ -13,19 +13,6 @@
     </head>
 
     <body>
-        <!-- <nav class="navbar">
-            <div class="logo">FitTrackr</div>
-            <ul class="nav-links">
-                <div class="menu">
-                    {% if current_user.is_authenticated %}
-                        <li><a href="{{ url_for('auth_bp.logout') }}">Log out</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('auth_bp.login') }}">Log in</a></li>
-                        <li><a href="{{ url_for('auth_bp.signup') }}">Sign-up</a></li>
-                    {% endif %}
-                </div>
-            </ul>
-        </nav> -->
         {% include "navigation.html" %}
         {% block content %}
         {% endblock %}

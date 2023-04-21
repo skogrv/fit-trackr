@@ -15,6 +15,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth_bp.login"
+login_manager.login_message_category = "danger"
 bcrypt = Bcrypt(app)
 db = SQLAlchemy(app)
 

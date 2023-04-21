@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, redirect, flash, request
-from .forms import RegistrationForm
+from flask import Blueprint, render_template, redirect, flash, request, url_for
+from .forms import RegistrationForm, LoginForm
 from flask_login import login_user, current_user
 from .models import User
-from app import db
+from app import db, bcrypt
 
 
 auth_bp = Blueprint("auth_bp", __name__,
@@ -13,7 +13,7 @@ auth_bp = Blueprint("auth_bp", __name__,
 def signup():
     if current_user.is_authenticated:
         flash("You are already registered")
-        return redirect(url_for("core_bp.home"))
+        return redirect(url_for("core.home"))
     form = RegistrationForm(request.form)
     if form.validate_on_submit():
         flash("Registered")
@@ -21,6 +21,18 @@ def signup():
     return render_template("signup.html", form=form)
 
 
-@auth_bp.route("/login")
+@auth_bp.route("/login", methods=["GET", "POST"])
 def login():
-    return render_template("login.html")
+    if current_user.is_authenticated:
+        flash("You are already logged in")
+        return redirect(url_for("core.home"))
+    form = LoginForm(request.form)
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password, request.form["password"]):
+           login_user(user) 
+           return redirect(url_for("core.home"))
+        else:
+            flash("Invalid username and/or password")
+            return render_template("login.html", form=form)
+    return render_template("login.html", form=form)
