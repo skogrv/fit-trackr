@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, redirect, flash
+from flask import Blueprint, render_template, redirect, flash, request
 from .forms import RegistrationForm
+from flask_login import login_user, current_user
+from .models import User
+from app import db
 
 
 auth_bp = Blueprint("auth_bp", __name__,
@@ -8,7 +11,10 @@ auth_bp = Blueprint("auth_bp", __name__,
 
 @auth_bp.route("/signup", methods=("GET", "POST"))
 def signup():
-    form = RegistrationForm()
+    if current_user.is_authenticated:
+        flash("You are already registered")
+        return redirect(url_for("core_bp.home"))
+    form = RegistrationForm(request.form)
     if form.validate_on_submit():
         flash("Registered")
         return redirect("/home")
