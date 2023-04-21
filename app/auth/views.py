@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, flash
-from app.forms import RegistrationForm
+from .forms import RegistrationForm
 
 
 auth_bp = Blueprint("auth_bp", __name__,
