@@ -4,3 +4,5 @@ __pycache__
 /app/__pycache__
 .env
 .old_venv
+/migrations
+/instance
