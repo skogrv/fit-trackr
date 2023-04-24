@@ -74,6 +74,10 @@ ul {
 .login-form {
     width: 340px;
     margin: 50px auto;
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%,-50%);
 }
 
 .login-form form {

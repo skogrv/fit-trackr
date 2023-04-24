@@ -13,17 +13,17 @@ auth_bp = Blueprint("auth", __name__,
 @auth_bp.route("/signup", methods=("GET", "POST"))
 def signup():
     if current_user.is_authenticated:
-        flash("You are already registered")
+        flash("You are already registered", "info")
         return redirect(url_for("core.home"))
     form = RegistrationForm(request.form)
     if form.validate_on_submit():
         user = User(username=form.username.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        
+
         login_user(user)
-        flash("Registered")
-        return redirect("/home")
+        flash("Registered", "success")
+        return redirect(url_for("core.home"))
     return render_template("signup.html", form=form)
 
 
@@ -39,7 +39,7 @@ def login():
             login_user(user)
             return redirect(url_for("core.home"))
         else:
-            flash("Invalid username and/or password")
+            flash("Invalid username and/or password", "danger")
             return render_template("login.html", form=form)
     return render_template("login.html", form=form)
 
