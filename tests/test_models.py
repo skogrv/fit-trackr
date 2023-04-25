@@ -52,12 +52,12 @@ class TestUser(BaseTestCase):
         self.assertFalse(bcrypt.check_password_hash(user.password, "testing1"))
 
     def test_validate_invalid_password(self):
-        # Ensure user can't login when the pasword is incorrect
+        # Ensure user can't login when the password is incorrect
         with self.client:
             self.client.get("/logout", follow_redirects=True)
             response = self.client.post(
                 "/login",
-                data=dict(email="testing", password="testing1"),
+                data=dict(username="testing", password="testing1"),
                 follow_redirects=True,
             )
         self.assertIn(b"Invalid username and/or password", response.data)

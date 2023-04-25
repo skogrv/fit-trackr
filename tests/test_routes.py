@@ -6,7 +6,7 @@ from flask_login import current_user
 class TestPublic(BaseTestCase):
     def test_home_route_requires_login(self):
         # Ensure main route requres logged in user
-        response = self.client.get("/", follow_redirects=true)
+        response = self.client.get("/home", follow_redirects=True)
         self.assertTrue(response.status_code == 200)
         self.assertIn(b"Please log in to access this page", response.data)
 
@@ -33,7 +33,7 @@ class TestLogging(BaseTestCase):
         # Ensure logout behaves correctly with session
         with self.client:
             self.client.post(
-                "/loging",
+                "/login",
                 data=dict(username="testing", password="testing"),
                 follow_redirects=True
             )
