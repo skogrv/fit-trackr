@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="logo">FitTrackr</div>
+    <a class="logo" href="{{ url_for('core.index') }}">FitTrackr</a>
     <ul class="nav-links">
         <div class="menu">
             {% if current_user.is_authenticated %}
