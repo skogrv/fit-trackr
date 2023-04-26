@@ -29,6 +29,15 @@ ul {
     color: #fff;
 }
 
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 1.54em);
+    background-color: #B6EADA;
+    font-size: 3em;
+}
+
 .nav-links a {
     color: #fff;
 }

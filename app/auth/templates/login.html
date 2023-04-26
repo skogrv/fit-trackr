@@ -3,7 +3,6 @@
 Login
 {% endblock %}
 {% block content %}
-<div class="main-content">
 <div class="login-form">
     <form action="/login" method="post">
         {{ form.csrf_token }}
@@ -29,5 +28,4 @@ Login
     </form>
     <p class="text-center"><a href="{{ url_for('auth.signup') }}">Create an Account</a></p>
 </div>
-
 {% endblock %}
