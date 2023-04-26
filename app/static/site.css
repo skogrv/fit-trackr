@@ -48,6 +48,10 @@ ul {
     font-size: 2em;
 }
 
+a[class="logo"] {
+    color: rgb(255, 255, 255);
+}
+
 /* NAVBAR MENU */
 .menu {
     display: flex;
