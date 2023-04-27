@@ -24,7 +24,7 @@ def signup():
         login_user(user)
         flash("Registered", "success")
         return redirect(url_for("core.home"))
-    return render_template("signup.html", form=form)
+    return render_template("auth/signup.html", form=form)
 
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -40,8 +40,8 @@ def login():
             return redirect(url_for("core.home"))
         else:
             flash("Invalid username and/or password", "danger")
-            return render_template("login.html", form=form)
-    return render_template("login.html", form=form)
+            return render_template("auth/login.html", form=form)
+    return render_template("auth/login.html", form=form)
 
 
 @auth_bp.route("/logout")
