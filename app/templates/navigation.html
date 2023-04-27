@@ -5,8 +5,14 @@
             {% if current_user.is_authenticated %}
                 <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
             {% else %}
+            {% if is_login_page %}
+                <li><a href="{{ url_for('auth.signup') }}">Sign-up</a></li>
+            {% elif is_signup_page %}    
+                <li><a id="login" href="{{ url_for('auth.login') }}">Log in</a></li>
+            {% else %}
                 <li><a id="login" href="{{ url_for('auth.login') }}">Log in</a></li>
                 <li><a href="{{ url_for('auth.signup') }}">Sign-up</a></li>
+            {% endif %}    
             {% endif %}
         </div>
     </ul>
