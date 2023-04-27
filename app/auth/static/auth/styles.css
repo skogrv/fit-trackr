@@ -12,3 +12,79 @@
     padding: 30px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 }
+
+.login-form form {
+    margin-bottom: 15px;
+    padding: 30px;
+}
+
+.login-form h2 {
+    margin: 0 0 1.5em;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.login-form .form-group {
+    margin-bottom: 15px;
+}
+
+.login-form .form-control {
+    height: 40px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+.login-form .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-form label.checkbox-inline {
+    font-size: 14px;
+    color: #666;
+    margin-right: 10px;
+}
+
+.login-form a.pull-right {
+    font-size: 14px;
+    color: #007bff;
+}
+
+.login-form p.text-center {
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.login-form a {
+    font-size: 14px;
+    color: #007bff;
+}
+
+.login-form a:hover {
+    text-decoration: none;
+}
+
+.checkbox-inline {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    margin-right: 0.2em;
+}
+
+.form-control,
+.btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+
+.btn {
+    font-size: 15px;
+    font-weight: bold;
+}
