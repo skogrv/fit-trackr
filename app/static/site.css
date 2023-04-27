@@ -29,6 +29,10 @@ ul {
     color: #fff;
 }
 
+#login {
+    font-size: 1rem;
+}
+
 .main-content {
     display: flex;
     align-items: center;
@@ -55,8 +59,8 @@ a[class="logo"] {
 /* NAVBAR MENU */
 .menu {
     display: flex;
-    gap: 1em;
-    font-size: 1.2em;
+    font-size: 1.2rem;
+    gap: 5px;
 }
 
 .menu li:hover {
