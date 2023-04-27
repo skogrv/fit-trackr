@@ -9,7 +9,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
+    {% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css', _external=False)}}" />
+    {% endblock %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">

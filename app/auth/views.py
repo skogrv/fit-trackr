@@ -7,7 +7,8 @@ from app import db, bcrypt
 
 auth_bp = Blueprint("auth", __name__,
                     template_folder="templates",
-                    static_folder="static")
+                    static_folder="static",
+                    static_url_path="/auth")
 
 
 @auth_bp.route("/signup", methods=("GET", "POST"))
