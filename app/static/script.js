@@ -41,9 +41,6 @@ function addExerciseRow(exerciseName) {
     // Set the text for the exercise name cell
     exerciseCell.textContent = exerciseName;
 
-    // Add the delete button to the delete cell
-    deleteCell.innerHTML = '<button type="button" class="btn btn-danger btn-sm" onclick="deleteExerciseRow(this)">Delete</button>';
-
     // Add the cells to the row
     newRow.appendChild(exerciseCell);
 
