@@ -8,9 +8,9 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.4.js"
         integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
     {% block head %}
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css', _external=False)}}" />
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     {% endblock %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
