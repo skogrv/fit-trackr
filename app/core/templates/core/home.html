@@ -2,3 +2,23 @@
 {% block title %}
 Welcome
 {% endblock %}
+{% block content %}
+<div class="row m-3">
+    <div class="rounded border p-4">
+        <div class="d-flex justify-content-between mb-3">
+            <h2 class="mb-0">Exercises</h2>
+            <button class="btn btn-primary" onclick="showAddExerciseForm()">Add</button>
+        </div>
+        <table class="table">
+            <tbody id="exercise-table-body">
+                <tr>
+                    <td>Bench Press</td>
+                </tr>
+                <tr>
+                    <td>Squats</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
