@@ -22,7 +22,7 @@ function showAddExerciseForm() {
         if (event.key === "Enter") {
             addExerciseRow(inputField.value, newRow);
             event.preventDefault();
-            inputField.textContent = "";
+            inputField.value = "";
         }
     });
     inputField.focus();
