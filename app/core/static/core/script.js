@@ -7,7 +7,7 @@ function showAddExerciseForm() {
     var exerciseCell = document.createElement("td");
 
     // Add input fields to the table cells
-    exerciseCell.innerHTML = '<input type="text" class="form-control" name="exercise" placeholder="Exercise" autofocus>';
+    exerciseCell.innerHTML = '<input type="text" class="form-control" name="exercise" placeholder="Exercise">';
 
     // Add the cells to the row
     newRow.appendChild(exerciseCell);
@@ -20,16 +20,17 @@ function showAddExerciseForm() {
     inputField.addEventListener("keypress", function (event) {
         // If "Enter" key is pressed, create a new exercise row
         if (event.key === "Enter") {
-            addExerciseRow(inputField.value);
+            addExerciseRow(inputField.value, newRow);
             event.preventDefault();
+            inputField.textContent = "";
         }
     });
     inputField.focus();
 }
 
-function addExerciseRow(exerciseName) {
+function addExerciseRow(exerciseName, newRow) {
     // Create a new table row
-    var newRow = document.createElement("tr");
+    var exerciseRow = document.createElement("tr");
 
     // Create table cells for the exercise name and delete button
     var exerciseCell = document.createElement("td");
@@ -38,9 +39,9 @@ function addExerciseRow(exerciseName) {
     exerciseCell.textContent = exerciseName;
 
     // Add the cells to the row
-    newRow.appendChild(exerciseCell);
+    exerciseRow.appendChild(exerciseCell);
 
     // Add the row to the table body
     var tableBody = document.getElementById("exercise-table-body");
-    tableBody.appendChild(newRow);
+    tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
