@@ -3,7 +3,8 @@ from flask_login import login_required, current_user
 
 core_bp = Blueprint("core", __name__,
                     template_folder="templates",
-                    static_folder="static")
+                    static_folder="static",
+                    static_url_path="/core")
 
 
 @core_bp.route("/home")

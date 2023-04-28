@@ -1,0 +1,5 @@
+@import url('/static/site.css');
+
+#exercise-table-body td {
+    padding: 0.5em 0em;
+}
