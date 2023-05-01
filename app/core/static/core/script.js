@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         else {
             removeInputForm();
-
         }
     })
 })
@@ -57,6 +56,7 @@ function createInputForm() {
         // If "Enter" key is pressed, create a new exercise row
         if (event.key === "Enter" && pattern.test(inputField.value)) {
             addExerciseRow(inputField.value, newRow);
+            saveExercise(inputField.value)
             event.preventDefault();
             inputField.value = "";
         }
@@ -83,4 +83,19 @@ function changeButton(toChange) {
         exercise_btn.classList.remove("btn-danger");
         exercise_btn.classList.add("btn-primary");
     }
+}
+
+function saveExercise(exerciseName) {
+    const formData = {
+        exerciseName: exerciseName,
+    };
+    fetch("/save-exercise", {
+        method: "POST",
+        headers: {
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .catch(console => console.error(error))
 }

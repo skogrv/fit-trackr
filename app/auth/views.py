@@ -11,7 +11,7 @@ auth_bp = Blueprint("auth", __name__,
                     static_url_path="/auth")
 
 
-@auth_bp.route("/signup", methods=("GET", "POST"))
+@auth_bp.route("/signup", methods=["GET", "POST"])
 def signup():
     if current_user.is_authenticated:
         flash("You are already registered", "info")

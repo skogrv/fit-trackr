@@ -4,13 +4,13 @@ from app import bcrypt, db
 
 
 class User(UserMixin, db.Model):
-
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
     created_on = db.Column(db.DateTime, nullable=False)
+    exercises = db.relationship('app.core.models.Exercise', back_populates='user')
 
     def __init__(self, username, password):
         self.username = username
