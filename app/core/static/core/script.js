@@ -86,7 +86,7 @@ function changeButton(toChange) {
 }
 
 function saveExercise(exerciseName) {
-    const url = `http://127.0.0.1:5000/home/save-exercise/${exerciseName}`;
+    const url = `http://192.168.0.107:5000/home/save-exercise/${exerciseName}`;
 
     fetch(url, {
         method: "POST"

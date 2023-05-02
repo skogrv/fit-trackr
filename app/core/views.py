@@ -13,7 +13,8 @@ core_bp = Blueprint("core", __name__,
 @core_bp.route("/home")
 @login_required
 def home():
-    exercises = Exercise.query.filter_by(user_id=current_user.get_id()).order_by(Exercise.id.desc()).all()
+    exercises = Exercise.query.filter_by(
+        user_id=current_user.get_id()).order_by(Exercise.id.desc()).all()
     return render_template("core/home.html", exercises=exercises)
 
 
@@ -24,6 +25,7 @@ def index():
     return render_template("core/index.html")
 
 @core_bp.route("/home/save-exercise/<exercise_name>", methods=["POST"])
+@login_required
 def save_exercise(exercise_name):
     form = ExerciseForm(exercise=exercise_name)
 
@@ -32,4 +34,4 @@ def save_exercise(exercise_name):
         db.session.add(exercise)
         db.session.commit()
 
-    return jsonify({"success": True})
+        return jsonify({"success": True})
