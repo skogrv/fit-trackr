@@ -31,7 +31,7 @@ def signup():
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
-        flash("You are already logged in")
+        flash("You are already logged in", "warning")
         return redirect(url_for("core.home"))
     form = LoginForm(request.form)
     if form.validate_on_submit():
