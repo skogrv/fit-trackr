@@ -86,16 +86,12 @@ function changeButton(toChange) {
 }
 
 function saveExercise(exerciseName) {
-    const formData = {
-        exerciseName: exerciseName,
-    };
-    fetch("/save-exercise", {
-        method: "POST",
-        headers: {
-            "Content-Type": 'application/json'
-        },
-        body: JSON.stringify(formData)
+    const url = `http://127.0.0.1:5000/home/save-exercise/${exerciseName}`;
+
+    fetch(url, {
+        method: "POST"
     })
-    .then(response => response.json())
-    .catch(console => console.error(error))
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
 }

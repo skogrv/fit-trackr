@@ -11,12 +11,11 @@ Welcome
         </div>
         <table class="table m-0">
             <tbody id="exercise-table-body">
+                {% for exercise in exercises %}
                 <tr>
-                    <td>Bench Press</td>
+                    <td>{{ exercise.name }}</td>
                 </tr>
-                <tr>
-                    <td>Squats</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

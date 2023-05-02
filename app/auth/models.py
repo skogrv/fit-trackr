@@ -10,7 +10,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.String(20), nullable=False)
     created_on = db.Column(db.DateTime, nullable=False)
-    exercises = db.relationship('app.core.models.Exercise', back_populates='user')
+
+    exercises = db.relationship(
+        'app.core.models.Exercise', back_populates='user')
 
     def __init__(self, username, password):
         self.username = username
