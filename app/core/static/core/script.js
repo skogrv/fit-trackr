@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const exerciseBtn = document.querySelector(".exercice-btn")
+    const exerciseBtn = document.querySelector(".exercise-btn")
 
     exerciseBtn.addEventListener("click", function () {
         if (exerciseBtn.textContent == "Add") {
@@ -30,49 +30,32 @@ function addExerciseRow(exerciseName, newRow) {
 }
 
 function createInputForm() {
-    // Create a new table row
-    var newRow = document.createElement("tr");
-    newRow.id = "add-exercise-row";
-
-    // Create table cells for the form fields
-    var exerciseCell = document.createElement("td");
-
-    // Add input fields to the table cells
-    exerciseCell.innerHTML = '<input type="text" class="form-control exercise-input" name="exercise" placeholder="Exercise">';
-
-    // Add the cells to the row
-    newRow.appendChild(exerciseCell);
-
-    // Insert the new row before the first row in the table
-    var tableBody = document.getElementById("exercise-table-body");
-    tableBody.insertBefore(newRow, tableBody.firstChild);
-
-    // Change the color of the button once it is clicked
+    const exerciseForm = document.querySelector("#add-exercise-form");
+    const exerciseRow = document.querySelector("#exercise-row");
+    const tableCell = document.querySelector("#exercise");
+    exerciseRow.style.display = "block";
     changeButton("X")
-
-    var inputField = newRow.querySelector(".exercise-input");
-    var pattern = /[a-zA-Z]/;
-    inputField.addEventListener("keypress", function (event) {
+    exerciseForm.addEventListener("keypress", function (event) {
         // If "Enter" key is pressed, create a new exercise row
-        if (event.key === "Enter" && pattern.test(inputField.value)) {
-            addExerciseRow(inputField.value, newRow);
-            saveExercise(inputField.value)
+        if (event.key === "Enter") {
+            saveExercise(tableCell.value, exerciseForm)
             event.preventDefault();
-            inputField.value = "";
+            tableCell.value = "";
+            removeInputForm()
         }
     });
-    inputField.focus();
+    exerciseForm.focus();
 }
 
 function removeInputForm() {
-    var inputField = document.querySelector("#exercise-table-body");
-    var tableRow = inputField.children[0];
-    tableRow.remove();
+    const inputField = document.querySelector("#exercise-table-body");
+    const tableRow = inputField.children[0];
+    tableRow.style.display = "none";
     changeButton("Add")
 }
 
 function changeButton(toChange) {
-    var exercise_btn = document.querySelector(".exercice-btn");
+    var exercise_btn = document.querySelector(".exercise-btn");
     if (toChange === "X") {
         exercise_btn.textContent = "X";
         exercise_btn.classList.remove("btn-primary");
@@ -85,13 +68,35 @@ function changeButton(toChange) {
     }
 }
 
-function saveExercise(exerciseName) {
-    const url = `http://192.168.0.107:5000/home/save-exercise/${exerciseName}`;
-
-    fetch(url, {
-        method: "POST"
+function saveExercise(exerciseName, form) {
+    const formData = new FormData(form);
+    fetch(form.action, {
+        method: 'POST',
+        body: formData,
     })
         .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
-}
+        .then(data => {
+            if (data.errors) {
+                // Display errors to the user
+                const errors = data.errors;
+                const errorList = form.querySelector('.errors');
+                // showErrors(errors)
+            } else {
+                // Success: Add the new exercise to the table
+                const inputRow = document.querySelector("#exercise-row")
+                addExerciseRow(exerciseName, inputRow)
+                // Hide the form
+                form.reset();
+                // form.parentNode.classList.add('d-none');
+            }
+        });
+};
+
+// function showErrors(errors) {
+//     for (let error in errors) {
+//         let errorItem = document.createElement('li');
+//         let tableBody = document.getElementById("exercise-table-body");
+//         errorItem.innerText = errors[fieldName];
+//         errorList.appendChild(errorItem);
+//     }
+// }

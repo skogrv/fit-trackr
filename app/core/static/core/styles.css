@@ -17,3 +17,11 @@
 .btn-sm {
     width: 4em;
 }
+
+#exercise-row {
+    display: none;
+}
+
+table td {
+    width: 3700px;
+}

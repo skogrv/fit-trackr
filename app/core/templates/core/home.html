@@ -7,10 +7,18 @@ Welcome
     <div class="rounded border p-0">
         <div class="d-flex justify-content-between p-3">
             <h2 class="mb-0">Exercises</h2>
-            <button class="btn btn-primary btn-sm exercice-btn">Add</button>
+            <button class="btn btn-primary btn-sm exercise-btn">Add</button>
         </div>
         <table class="table m-0">
             <tbody id="exercise-table-body">
+                <tr id="exercise-row">
+                    <td>
+                        <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
+                            {{ form.csrf_token }}
+                            {{ form.exercise(class="form-control") }}
+                        </form>
+                    </td>
+                </tr>
                 {% for exercise in exercises %}
                 <tr>
                     <td>{{ exercise.name }}</td>
