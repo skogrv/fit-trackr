@@ -36,11 +36,10 @@ function createInputForm() {
     exerciseRow.style.display = "block";
     changeButton("X")
     exerciseForm.addEventListener("keypress", function (event) {
-        // If "Enter" key is pressed, create a new exercise row
+        // If "Enter" key is pressed, send exercise to flask form and add new row
         if (event.key === "Enter") {
             saveExercise(tableCell.value, exerciseForm)
             event.preventDefault();
-            tableCell.value = "";
             removeInputForm()
         }
     });
@@ -68,9 +67,9 @@ function changeButton(toChange) {
     }
 }
 
-function saveExercise(exerciseName, form) {
-    const formData = new FormData(form);
-    fetch(form.action, {
+function saveExercise(exerciseName, exerciseForm) {
+    const formData = new FormData(exerciseForm);
+    fetch(exerciseForm.action, {
         method: 'POST',
         body: formData,
     })
@@ -79,14 +78,14 @@ function saveExercise(exerciseName, form) {
             if (data.errors) {
                 // Display errors to the user
                 const errors = data.errors;
-                const errorList = form.querySelector('.errors');
+                const errorList = exerciseForm.querySelector('.errors');
                 // showErrors(errors)
             } else {
                 // Success: Add the new exercise to the table
                 const inputRow = document.querySelector("#exercise-row")
                 addExerciseRow(exerciseName, inputRow)
                 // Hide the form
-                form.reset();
+                exerciseForm.reset();
                 // form.parentNode.classList.add('d-none');
             }
         });
