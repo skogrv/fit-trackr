@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function addExerciseRow(exerciseName, newRow) {
     // Create a new table row
-    var exerciseRow = document.createElement("tr");
+    const exerciseRow = document.createElement("tr");
 
     // Create table cells for the exercise name and delete button
-    var exerciseCell = document.createElement("td");
+    const exerciseCell = document.createElement("td");
 
     // Set the text for the exercise name cell
     exerciseCell.textContent = exerciseName;
@@ -25,7 +25,7 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseRow.appendChild(exerciseCell);
 
     // Add the row to the table body
-    var tableBody = document.getElementById("exercise-table-body");
+    const tableBody = document.getElementById("exercise-table-body");
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
 
@@ -37,14 +37,15 @@ function createInputForm() {
     const exerciseRow = document.querySelector("#exercise-row");
     const tableCell = document.querySelector("#exercise");
     exerciseRow.style.display = "block";
+
     changeButton("X")
     if (!exerciseEventListenerAttached) {
         exerciseForm.addEventListener("keypress", function (event) {
             // If "Enter" key is pressed, send exercise to flask form and add new row
             if (event.key === "Enter") {
+                exerciseRow.style.display = "block";
                 saveExercise(tableCell.value, exerciseForm)
                 event.preventDefault();
-                removeInputForm();
             }
         });
 
@@ -94,16 +95,7 @@ function saveExercise(exerciseName, exerciseForm) {
                 addExerciseRow(exerciseName, inputRow)
                 // Hide the form
                 exerciseForm.reset();
-                // form.parentNode.classList.add('d-none');
+                changeButton("X")
             }
         });
 };
-
-// function showErrors(errors) {
-//     for (let error in errors) {
-//         let errorItem = document.createElement('li');
-//         let tableBody = document.getElementById("exercise-table-body");
-//         errorItem.innerText = errors[fieldName];
-//         errorList.appendChild(errorItem);
-//     }
-// }
