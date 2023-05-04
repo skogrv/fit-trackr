@@ -38,6 +38,5 @@ def save_exercise():
         db.session.commit()
 
         return jsonify({'success': True, 'exercise_name': form.exercise.data})
-
     else:
         return jsonify({'success': False, 'errors': form.errors})

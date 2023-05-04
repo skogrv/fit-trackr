@@ -29,22 +29,30 @@ function addExerciseRow(exerciseName, newRow) {
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
 
+// Keep track of 
+let exerciseEventListenerAttached = false;
+
 function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
     const exerciseRow = document.querySelector("#exercise-row");
     const tableCell = document.querySelector("#exercise");
     exerciseRow.style.display = "block";
     changeButton("X")
-    exerciseForm.addEventListener("keypress", function (event) {
-        // If "Enter" key is pressed, send exercise to flask form and add new row
-        if (event.key === "Enter") {
-            saveExercise(tableCell.value, exerciseForm)
-            event.preventDefault();
-            removeInputForm()
-        }
-    });
-    exerciseForm.focus();
+    if (!exerciseEventListenerAttached) {
+        exerciseForm.addEventListener("keypress", function (event) {
+            // If "Enter" key is pressed, send exercise to flask form and add new row
+            if (event.key === "Enter") {
+                saveExercise(tableCell.value, exerciseForm)
+                event.preventDefault();
+                removeInputForm();
+            }
+        });
+
+        exerciseEventListenerAttached = true;
+    }
+    tableCell.focus();
 }
+
 
 function removeInputForm() {
     const inputField = document.querySelector("#exercise-table-body");
