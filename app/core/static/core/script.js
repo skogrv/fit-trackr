@@ -84,12 +84,7 @@ function saveExercise(exerciseName, exerciseForm) {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.errors) {
-                // Display errors to the user
-                const errors = data.errors;
-                const errorList = exerciseForm.querySelector('.errors');
-                // showErrors(errors)
-            } else {
+            if (!data.errors) {
                 // Success: Add the new exercise to the table
                 const inputRow = document.querySelector("#exercise-row")
                 addExerciseRow(exerciseName, inputRow)
