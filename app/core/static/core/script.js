@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    editExercise()
     const exerciseBtn = document.querySelector(".exercise-btn")
 
     exerciseBtn.addEventListener("click", function () {
@@ -10,6 +11,39 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     })
 })
+
+function editExercise() {
+    const exerciseCells = document.querySelectorAll(".editable-td");
+    exerciseCells.forEach(cell => {
+        cell.addEventListener("click", () => {
+            const exerciseId = cell.dataset.id;
+            cell.contentEditable = true;
+            cell.focus();
+            cell.addEventListener("keydown", (event) => {
+                if (event.key == "Enter") {
+                    event.preventDefault();
+                    const newName = cell.textContent;
+                    fetch(`/home/edit-exercise/${exerciseId}`, {
+                        method: "PUT",
+                        body: JSON.stringify({ name: newName }),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRFToken": "{{ csrf_token() }}"
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log("Exercise name updated");
+                            }
+                            else {
+                                console.log("Failed to update")
+                            }
+                        })
+                }
+            })
+        })
+    })
+}
 
 function addExerciseRow(exerciseName, newRow) {
     // Create a new table row
@@ -81,6 +115,9 @@ function saveExercise(exerciseName, exerciseForm) {
     fetch(exerciseForm.action, {
         method: 'POST',
         body: formData,
+        headers: {
+            "X-CSRFToken": "{{ csrf_token() }}"
+        }
     })
         .then(response => response.json())
         .then(data => {

@@ -21,7 +21,7 @@ Welcome
                 </tr>
                 {% for exercise in exercises %}
                 <tr>
-                    <td>{{ exercise.name }}</td>
+                    <td class="editable-td" data-id="{{ exercise.id }}">{{ exercise.name }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
