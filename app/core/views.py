@@ -37,22 +37,23 @@ def save_exercise():
         db.session.add(exercise)
         db.session.commit()
 
-        return jsonify({'success': True, 'exercise_name': form.exercise.data})
+        return jsonify({'success': True, 'exercise_name': form.exercise.data}), 200
     else:
-        return jsonify({'success': False, 'errors': form.errors})
+        return jsonify({'success': False, 'errors': form.errors}), 400
 
 
 @core_bp.route("/home/edit-exercise/<int:exercise_id>", methods=["PUT"])
 @login_required
 def update_exercise(exercise_id):
-    data = request.json
-    new_name = data.get("name")
     exercise = Exercise.query.get(exercise_id)
     if not exercise:
         return jsonify({"success": False, "message": "Exercise not found"})
+    data = request.json
+    new_name = data["name"]
     form = ExerciseForm(exercise=new_name)
     if form.validate_on_submit():
         exercise.name = new_name
         db.session.commit()
         return jsonify({"success": True})
-    return jsonify({"success": False, "message": "Validation did not succeed"})
+    else: 
+        return jsonify({"success": False, "errors": form.errors})
