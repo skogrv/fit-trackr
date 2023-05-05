@@ -12,7 +12,7 @@ Welcome
         <table class="table m-0">
             <tbody id="exercise-table-body">
                 <tr id="exercise-row">
-                    <td>
+                    <td id="exercise-data">
                         <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
                             {{ form.csrf_token }}
                             {{ form.exercise(class="form-control") }}

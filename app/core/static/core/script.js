@@ -22,6 +22,19 @@ function editExercise() {
     })
 }
 
+function addEventListenerExercise(cell) {
+    cell.contentEditable = true;
+    cell.focus();
+    cell.addEventListener("keydown", (event) => {
+        if (event.key == "Enter") {
+            fetchExercise(cell, event);
+        }
+    })
+    cell.addEventListener("blur", (event) => {
+        fetchExercise(cell, event);
+    })
+}
+
 function addExercise() {
     const exerciseBtn = document.querySelector(".exercise-btn")
 
@@ -61,7 +74,12 @@ function addExerciseRow(exerciseName, newRow) {
     const exerciseRow = document.createElement("tr");
     const exerciseCell = document.createElement("td");
     exerciseCell.textContent = exerciseName;
+    const maxId = Math.max(...Array.from(document.querySelectorAll('.editable-td')).map(cell => cell.dataset.id));
+    const newId = maxId + 1;
+    exerciseCell.classList.add("editable-td");
+    exerciseCell.setAttribute("data-id", newId);
     exerciseRow.appendChild(exerciseCell);
+    addEventListenerExercise(exerciseCell) 
     const tableBody = document.getElementById("exercise-table-body");
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
@@ -72,6 +90,7 @@ function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
     const exerciseRow = document.querySelector("#exercise-row");
     const tableCell = document.querySelector("#exercise");
+    const exerciseData = document.querySelector("#exercise-data");
     exerciseRow.style.display = "block";
 
     changeButton("X")
@@ -81,6 +100,8 @@ function createInputForm() {
                 exerciseRow.style.display = "block";
                 saveExercise(tableCell.value, exerciseForm);
                 event.preventDefault();
+                // exerciseData.classList.add("editable-td");
+                // addEventListenerExercise(exerciseData)
             }
         });
 
