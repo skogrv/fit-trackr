@@ -91,7 +91,7 @@ function createInputForm() {
     const exerciseRow = document.querySelector("#exercise-row");
     const tableCell = document.querySelector("#exercise");
     const exerciseData = document.querySelector("#exercise-data");
-    exerciseRow.style.display = "block";
+    exerciseRow.style.display = "table-row";
 
     changeButton("X")
     if (!exerciseEventListenerAttached) {
@@ -100,8 +100,6 @@ function createInputForm() {
                 exerciseRow.style.display = "block";
                 saveExercise(tableCell.value, exerciseForm);
                 event.preventDefault();
-                // exerciseData.classList.add("editable-td");
-                // addEventListenerExercise(exerciseData)
             }
         });
 

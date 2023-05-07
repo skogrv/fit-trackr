@@ -12,7 +12,7 @@ Welcome
         <table class="table m-0">
             <tbody id="exercise-table-body">
                 <tr id="exercise-row">
-                    <td id="exercise-data">
+                    <td id="exercise-data" colspan="2">
                         <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
                             {{ form.csrf_token }}
                             {{ form.exercise(class="form-control") }}
@@ -22,6 +22,7 @@ Welcome
                 {% for exercise in exercises %}
                 <tr>
                     <td class="editable-td" data-id="{{ exercise.id }}">{{ exercise.name }}</td>
+                    <td class="remove-btn">HEEE</td>
                 </tr>
                 {% endfor %}
             </tbody>
