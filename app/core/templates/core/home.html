@@ -22,11 +22,14 @@ Welcome
                 {% for exercise in exercises %}
                 <tr>
                     <td class="editable-td" data-id="{{ exercise.id }}">{{ exercise.name }}</td>
-                    <td class="remove-btn">HEEE</td>
+                    <td class="remove-btn"><img src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+<script>
+    const removeBtn = "{{ url_for('.static', filename='core/remove.png') }}";
+</script>
 {% endblock %}

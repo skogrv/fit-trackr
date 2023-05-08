@@ -73,13 +73,22 @@ function fetchExercise(cell, event) {
 function addExerciseRow(exerciseName, newRow) {
     const exerciseRow = document.createElement("tr");
     const exerciseCell = document.createElement("td");
+    const deleteCell = document.createElement("td");
+    deleteCell.classList.add("remove-btn");
+    const deleteImg = document.createElement("img");
+    deleteImg.src = removeBtn;
+    deleteCell.appendChild(deleteImg)
     exerciseCell.textContent = exerciseName;
+
+    // Find the latest id number and create assign latest + 1 to id
     const maxId = Math.max(...Array.from(document.querySelectorAll('.editable-td')).map(cell => cell.dataset.id));
     const newId = maxId + 1;
     exerciseCell.classList.add("editable-td");
     exerciseCell.setAttribute("data-id", newId);
+
     exerciseRow.appendChild(exerciseCell);
-    addEventListenerExercise(exerciseCell) 
+    exerciseRow.appendChild(deleteCell);
+    addEventListenerExercise(exerciseCell);
     const tableBody = document.getElementById("exercise-table-body");
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
@@ -90,14 +99,13 @@ function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
     const exerciseRow = document.querySelector("#exercise-row");
     const tableCell = document.querySelector("#exercise");
-    const exerciseData = document.querySelector("#exercise-data");
     exerciseRow.style.display = "table-row";
 
     changeButton("X")
     if (!exerciseEventListenerAttached) {
         exerciseForm.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
-                exerciseRow.style.display = "block";
+                exerciseRow.style.display = "table-row";
                 saveExercise(tableCell.value, exerciseForm);
                 event.preventDefault();
             }

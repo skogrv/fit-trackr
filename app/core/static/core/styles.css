@@ -21,3 +21,7 @@
 #exercise-row {
     display: none;
 }
+
+.remove-btn {
+    width: 6%;
+}
