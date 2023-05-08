@@ -2,7 +2,7 @@
 
 #exercise-table-body td {
     position: relative;
-    padding: 0.7em;
+    padding: 0.7rem 0.5rem;
     border-top: 1px solid;
     border-color: inherit;
 } 
@@ -14,14 +14,19 @@
     padding: 0;
 }
 
-.btn-sm {
-    width: 4em;
-}
-
 #exercise-row {
     display: none;
 }
 
+.btn-sm {
+    width: 4em;
+}
+
+.editable-td {
+    width: 92%;
+}
+
 .remove-btn {
-    width: 6%;
+    width: 8%;
+    text-align: end;
 }

@@ -5,11 +5,17 @@ Welcome
 {% block content %}
 <div class="row m-3">
     <div class="rounded border p-0">
-        <div class="d-flex justify-content-between p-3">
+        <!-- <div class="d-flex justify-content-between p-3">
             <h2 class="mb-0">Exercises</h2>
             <button class="btn btn-primary btn-sm exercise-btn">Add</button>
-        </div>
+        </div> -->
         <table class="table m-0">
+            <thead>
+                <tr>
+                  <th scope="col"><h3 class="m-0">Exercises</h2></th>
+                  <th scope="col"><button class="btn btn-primary btn-sm exercise-btn">Add</button></th>
+                </tr>
+              </thead>
             <tbody id="exercise-table-body">
                 <tr id="exercise-row">
                     <td id="exercise-data" colspan="2">
@@ -21,7 +27,9 @@ Welcome
                 </tr>
                 {% for exercise in exercises %}
                 <tr>
-                    <td class="editable-td" data-id="{{ exercise.id }}">{{ exercise.name }}</td>
+                    <td class="editable-td" data-id="{{ exercise.id }}">
+                        <div contenteditable="true" class="form-control">{{ exercise.name }}</div>
+                    </td>                    
                     <td class="remove-btn"><img src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>
                 {% endfor %}

@@ -8,7 +8,6 @@ function editExercise() {
 
     exerciseCells.forEach(cell => {
         cell.addEventListener("click", () => {
-            cell.contentEditable = true;
             cell.focus();
             cell.addEventListener("keydown", (event) => {
                 if (event.key == "Enter") {
