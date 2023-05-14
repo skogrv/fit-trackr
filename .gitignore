@@ -1,8 +1,7 @@
 __pycache__
-.venv
+venv
 .vscode
 /app/__pycache__
 .env
-.old_venv
 /migrations
 /instance
