@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     editExercise();
     addExercise();
+    removeExercise();
 })
 
 function editExercise() {
@@ -69,6 +70,17 @@ function fetchExercise(cell, event) {
         })
 }
 
+function removeExercise() {
+    const removeImg = document.querySelectorAll("#remove-img");
+    removeImg.forEach(cell => {
+        cell.addEventListener("click", (event) => {
+            const clickedImg = event.target; 
+            const parentRow = clickedImg.parentNode.parentNode;
+            parentRow.style.display = "none";
+        })
+    })
+}
+
 function addExerciseRow(exerciseName, newRow) {
     const exerciseRow = document.createElement("tr");
     const exerciseCell = document.createElement("td");
@@ -80,10 +92,10 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseCell.textContent = exerciseName;
 
     // Find the latest id number and create assign latest + 1 to id
-    const maxId = Math.max(...Array.from(document.querySelectorAll('.editable-td')).map(cell => cell.dataset.id));
+    const maxId = Math.max(...Array.from(document.querySelectorAll('.exercise-row')).map(cell => cell.dataset.id));
     const newId = maxId + 1;
     exerciseCell.classList.add("editable-td");
-    exerciseCell.setAttribute("data-id", newId);
+    exerciseRow.setAttribute("data-id", newId);
 
     exerciseRow.appendChild(exerciseCell);
     exerciseRow.appendChild(deleteCell);
@@ -148,7 +160,7 @@ function saveExercise(exerciseName, exerciseForm) {
     })
         .then(response => {
             if (response.ok) {
-                const inputRow = document.querySelector("#exercise-row");
+                const inputRow = document.querySelector(".exercise-row");
                 addExerciseRow(exerciseName, inputRow);
             }
             else {
