@@ -57,7 +57,7 @@ function fetchExercise(cell, event) {
         body: JSON.stringify({ name: newName }),
         headers: {
             "Content-Type": "application/json",
-            "X-CSRFToken": "{{ csrf_token() }}"
+            "X-CSRFToken": "{{ session['csrf_token'] }}"
         }
     })
         .then(response => {
@@ -77,8 +77,29 @@ function removeExercise() {
             const clickedImg = event.target; 
             const parentRow = clickedImg.parentNode.parentNode;
             parentRow.style.display = "none";
+            fetchRemoveExercise(parentRow);
         })
     })
+}
+
+function fetchRemoveExercise(rowToRemove) {
+    const rowId = rowToRemove.getAttribute("data-id");
+    fetch(`/home/remove-exercise/${rowId}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ session['csrf_token'] }}"
+        }
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Deleted");
+            }
+            else {
+                console.log("Not deleted")
+            }
+        })
+        .catch(error => console.log(error));
 }
 
 function addExerciseRow(exerciseName, newRow) {

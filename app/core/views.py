@@ -57,3 +57,15 @@ def update_exercise(exercise_id):
         return jsonify({"success": True})
     else: 
         return jsonify({"success": False, "errors": form.errors})
+    
+
+@core_bp.route("/home/remove-exercise/<int:exercise_id>", methods=["DELETE"])
+@login_required
+def delete_exercise(exercise_id): 
+    exercise = Exercise.query.filter_by(id=exercise_id).delete()
+    if exercise:
+        db.session.commit()
+        return jsonify({"success": True}), 204
+    else: 
+        return jsonify({"success": False, "errors": "Value does not exists"}), 400
+    
