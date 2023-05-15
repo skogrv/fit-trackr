@@ -4,12 +4,12 @@ Welcome
 {% endblock %}
 {% block content %}
 <div class="row m-3">
-    <div class="rounded border p-0">
+    <div class="col rounded border p-0">
         <table class="table m-0">
             <thead>
                 <tr>
                   <th scope="col"><h3 class="m-0">Exercises</h2></th>
-                  <th scope="col"><button class="btn btn-primary btn-sm exercise-btn">Add</button></th>
+                  <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm exercise-btn">Add</button></th>
                 </tr>
               </thead>
             <tbody id="exercise-table-body">
@@ -33,4 +33,7 @@ Welcome
         </table>
     </div>
 </div>
+<script>
+        const removeBtn = "{{ url_for('.static', filename='core/remove.png') }}";
+</script>
 {% endblock %}

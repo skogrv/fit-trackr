@@ -103,6 +103,7 @@ function fetchRemoveExercise(rowToRemove) {
 }
 
 function addExerciseRow(exerciseName, newRow) {
+    console.log("In add")
     const exerciseRow = document.createElement("tr");
     const exerciseCell = document.createElement("td");
     const deleteCell = document.createElement("td");
@@ -181,7 +182,7 @@ function saveExercise(exerciseName, exerciseForm) {
     })
         .then(response => {
             if (response.ok) {
-                const inputRow = document.querySelector(".exercise-row");
+                const inputRow = document.querySelector("#exercise-row");
                 addExerciseRow(exerciseName, inputRow);
             }
             else {

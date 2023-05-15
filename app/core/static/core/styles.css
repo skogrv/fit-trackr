@@ -30,3 +30,9 @@
     width: 8%;
     text-align: end;
 }
+
+.header-btn {
+    display: flex;
+    justify-content: end;
+    border-bottom: 0;
+}
