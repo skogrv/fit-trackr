@@ -23,8 +23,8 @@ Welcome
                 </tr>
                 {% for exercise in exercises %}
                 <tr class="exercise-row-added" data-id="{{ exercise.id }}">
-                    <td class="editable-td">
-                        <div contenteditable="true" class="form-control">{{ exercise.name }}</div>
+                    <td>
+                        <div contenteditable="true" class="form-control editable-td">{{ exercise.name }}</div>
                     </td>                    
                     <td class="remove-btn"><img id="remove-img" src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>

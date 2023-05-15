@@ -1,37 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
-    editExercise();
+    const exerciseCells = document.querySelectorAll(".editable-td");
+    exerciseCells.forEach(attachExerciseCellEventListeners)
     addExercise();
     removeExercise();
 })
 
-function editExercise() {
-    const exerciseCells = document.querySelectorAll(".editable-td");
-
-    exerciseCells.forEach(cell => {
-        cell.addEventListener("click", () => {
-            cell.focus();
-            cell.addEventListener("keydown", (event) => {
-                if (event.key == "Enter") {
-                    fetchExercise(cell, event);
-                }
-            })
-            cell.addEventListener("blur", (event) => {
-                fetchExercise(cell, event);
-            })
+function attachExerciseCellEventListeners(cell) {
+    cell.addEventListener("click", (event) => {
+        const rowId = event.target.parentNode.parentNode.getAttribute("data-id");
+        cell.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+                fetchExercise(cell, rowId, event);
+            }
         })
-    })
-}
-
-function addEventListenerExercise(cell) {
-    cell.contentEditable = true;
-    cell.focus();
-    cell.addEventListener("keydown", (event) => {
-        if (event.key == "Enter") {
-            fetchExercise(cell, event);
-        }
-    })
-    cell.addEventListener("blur", (event) => {
-        fetchExercise(cell, event);
+        cell.addEventListener("blur", (event) => {
+            fetchExercise(cell, rowId, event);
+        })
     })
 }
 
@@ -48,11 +32,9 @@ function addExercise() {
     })
 }
 
-function fetchExercise(cell, event) {
-    event.preventDefault();
-    const exerciseId = cell.dataset.id;
+function fetchExercise(cell, rowId, event) {
     const newName = cell.textContent;
-    fetch(`/home/edit-exercise/${exerciseId}`, {
+    fetch(`/home/edit-exercise/${rowId}`, {
         method: "PUT",
         body: JSON.stringify({ name: newName }),
         headers: {
@@ -103,27 +85,31 @@ function fetchRemoveExercise(rowToRemove) {
 }
 
 function addExerciseRow(exerciseName, newRow) {
-    console.log("In add")
     const exerciseRow = document.createElement("tr");
     const exerciseCell = document.createElement("td");
+    const editableDiv = document.createElement("div");
     const deleteCell = document.createElement("td");
     deleteCell.classList.add("remove-btn");
     const deleteImg = document.createElement("img");
     deleteImg.src = removeBtn;
     deleteCell.appendChild(deleteImg)
-    exerciseCell.textContent = exerciseName;
+    editableDiv.textContent = exerciseName;
+    editableDiv.contentEditable = true;
+    editableDiv.classList.add("form-control");
+    editableDiv.classList.add("editable-td");
 
     // Find the latest id number and create assign latest + 1 to id
-    const maxId = Math.max(...Array.from(document.querySelectorAll('.exercise-row')).map(cell => cell.dataset.id));
+    const maxId = Math.max(...Array.from(document.querySelectorAll('.exercise-row-added')).map(cell => cell.dataset.id));
     const newId = maxId + 1;
-    exerciseCell.classList.add("editable-td");
     exerciseRow.setAttribute("data-id", newId);
 
     exerciseRow.appendChild(exerciseCell);
     exerciseRow.appendChild(deleteCell);
-    addEventListenerExercise(exerciseCell);
+    exerciseCell.appendChild(editableDiv);
+    attachExerciseCellEventListeners(editableDiv);
     const tableBody = document.getElementById("exercise-table-body");
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
+    attachExerciseCellEventListeners(editableDiv);
 }
 
 let exerciseEventListenerAttached = false;
