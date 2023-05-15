@@ -13,7 +13,7 @@ Welcome
                 </tr>
               </thead>
             <tbody id="exercise-table-body">
-                <tr id="exercise-row">
+                <tr class="exercise-row">
                     <td id="exercise-data" colspan="2">
                         <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
                             {{ form.csrf_token }}
@@ -33,4 +33,7 @@ Welcome
         </table>
     </div>
 </div>
+<script>
+    removeBtn = "{{ url_for('.static', filename='core/remove.png') }}"
+</script>
 {% endblock %}

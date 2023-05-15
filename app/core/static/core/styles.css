@@ -14,7 +14,7 @@
     padding: 0;
 }
 
-#exercise-row {
+.exercise-row {
     display: none;
 }
 
@@ -27,7 +27,7 @@
     text-align: end;
 }
 
-.header-btn {
+#header-btn {
     display: flex;
     justify-content: end;
     border-bottom: 0;

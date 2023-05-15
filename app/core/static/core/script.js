@@ -87,9 +87,8 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseRow.classList.add("exercise-row-added");
     deleteCell.classList.add("remove-btn");
     const deleteImg = document.createElement("img");
-    const removeBtn = document.querySelector(".remove-img");
-    const srcRemoveBtn = removeBtn.src;
-    deleteImg.src = srcRemoveBtn;
+    
+    deleteImg.src = removeBtn;
     deleteImg.setAttribute("class", "remove-img");
     deleteCell.appendChild(deleteImg);
     editableDiv.textContent = exerciseName;
@@ -114,26 +113,27 @@ let exerciseEventListenerAttached = false;
 
 function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
-    const exerciseRow = document.querySelector("#exercise-row");
+    const exerciseRow = document.querySelector(".exercise-row");
     const exerciseInput = document.querySelector("#exercise");
     exerciseRow.style.display = "table-row";
-    exerciseForm.focus()
 
     changeButton("X")
+    exerciseInput.focus();
     if (!exerciseEventListenerAttached) {
-        exerciseForm.addEventListener("keypress", function (event) {
-            if (event.key === "Enter") {
+        exerciseInput.addEventListener("keypress", function (event) {
+            if (event.key === "Enter" || event.key === "Return") {
                 exerciseRow.style.display = "table-row";
                 saveExercise(exerciseInput.value, exerciseForm);
                 event.preventDefault();
             }
         });
-        exerciseInput.addEventListener("blur", () => {
-            removeInputForm();
+        exerciseInput.addEventListener("blur", (event) => {
+            if (!event.relatedTarget || !(event.relatedTarget.nodeName == "BUTTON")) {
+                removeInputForm();
+            }
         })
         exerciseEventListenerAttached = true;
     }
-    exerciseInput.focus();
 }
 
 
@@ -169,7 +169,7 @@ function saveExercise(exerciseName, exerciseForm) {
     })
         .then(response => {
             if (response.ok) {
-                const inputRow = document.querySelector("#exercise-row");
+                const inputRow = document.querySelector(".exercise-row");
                 addExerciseRow(exerciseName, inputRow);
             }
             else {
