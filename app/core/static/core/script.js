@@ -6,16 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function attachExerciseCellEventListeners(exercise) {
     const editableData = exercise.querySelector("td div");
-    const removeBtn = exercise.querySelector("img#remove-img");
+    const removeBtn = exercise.querySelector("img.remove-img");
     editableData.addEventListener("click", (event) => {
         const rowId = event.target.parentNode.parentNode.getAttribute("data-id");
         editableData.addEventListener("keydown", (event) => {
             if (event.key == "Enter") {
-                fetchExercise(editableData, rowId, event);
+                editExercise(editableData, rowId);
             }
         })
         editableData.addEventListener("blur", (event) => {
-            fetchExercise(editableData, rowId, event);
+            editExercise(editableData, rowId);
         })
     })
     removeBtn.addEventListener("click", (event) => {
@@ -39,7 +39,7 @@ function addExercise() {
     })
 }
 
-function fetchExercise(cell, rowId, event) {
+function editExercise(cell, rowId) {
     const newName = cell.textContent;
     fetch(`/home/edit-exercise/${rowId}`, {
         method: "PUT",
@@ -87,10 +87,10 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseRow.classList.add("exercise-row-added");
     deleteCell.classList.add("remove-btn");
     const deleteImg = document.createElement("img");
-    const removeBtn = document.getElementById("remove-img");
+    const removeBtn = document.querySelector(".remove-img");
     const srcRemoveBtn = removeBtn.src;
     deleteImg.src = srcRemoveBtn;
-    deleteImg.setAttribute("id", "remove-img");
+    deleteImg.setAttribute("class", "remove-img");
     deleteCell.appendChild(deleteImg);
     editableDiv.textContent = exerciseName;
     editableDiv.contentEditable = true;
@@ -115,22 +115,25 @@ let exerciseEventListenerAttached = false;
 function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
     const exerciseRow = document.querySelector("#exercise-row");
-    const tableCell = document.querySelector("#exercise");
+    const exerciseInput = document.querySelector("#exercise");
     exerciseRow.style.display = "table-row";
+    exerciseForm.focus()
 
     changeButton("X")
     if (!exerciseEventListenerAttached) {
         exerciseForm.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 exerciseRow.style.display = "table-row";
-                saveExercise(tableCell.value, exerciseForm);
+                saveExercise(exerciseInput.value, exerciseForm);
                 event.preventDefault();
             }
         });
-
+        exerciseInput.addEventListener("blur", () => {
+            removeInputForm();
+        })
         exerciseEventListenerAttached = true;
     }
-    tableCell.focus();
+    exerciseInput.focus();
 }
 
 
