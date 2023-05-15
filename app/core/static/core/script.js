@@ -87,7 +87,9 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseRow.classList.add("exercise-row-added");
     deleteCell.classList.add("remove-btn");
     const deleteImg = document.createElement("img");
-    deleteImg.src = removeBtn;
+    const removeBtn = document.getElementById("remove-img");
+    const srcRemoveBtn = removeBtn.src;
+    deleteImg.src = srcRemoveBtn;
     deleteImg.setAttribute("id", "remove-img");
     deleteCell.appendChild(deleteImg);
     editableDiv.textContent = exerciseName;
