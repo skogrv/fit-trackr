@@ -1,21 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const exerciseCells = document.querySelectorAll(".editable-td");
-    exerciseCells.forEach(attachExerciseCellEventListeners)
+    const exercises = document.querySelectorAll(".exercise-row-added");
+    exercises.forEach(attachExerciseCellEventListeners);
     addExercise();
-    removeExercise();
 })
 
-function attachExerciseCellEventListeners(cell) {
-    cell.addEventListener("click", (event) => {
+function attachExerciseCellEventListeners(exercise) {
+    const editableData = exercise.querySelector("td div");
+    const removeBtn = exercise.querySelector("img#remove-img");
+    editableData.addEventListener("click", (event) => {
         const rowId = event.target.parentNode.parentNode.getAttribute("data-id");
-        cell.addEventListener("keydown", (event) => {
+        editableData.addEventListener("keydown", (event) => {
             if (event.key == "Enter") {
-                fetchExercise(cell, rowId, event);
+                fetchExercise(editableData, rowId, event);
             }
         })
-        cell.addEventListener("blur", (event) => {
-            fetchExercise(cell, rowId, event);
+        editableData.addEventListener("blur", (event) => {
+            fetchExercise(editableData, rowId, event);
         })
+    })
+    removeBtn.addEventListener("click", (event) => {
+        const clickedImg = event.target;
+        const parentRow = clickedImg.parentNode.parentNode;
+        parentRow.remove()
+        fetchRemoveExercise(parentRow);
     })
 }
 
@@ -52,18 +59,6 @@ function fetchExercise(cell, rowId, event) {
         })
 }
 
-function removeExercise() {
-    const removeImg = document.querySelectorAll("#remove-img");
-    removeImg.forEach(cell => {
-        cell.addEventListener("click", (event) => {
-            const clickedImg = event.target; 
-            const parentRow = clickedImg.parentNode.parentNode;
-            parentRow.style.display = "none";
-            fetchRemoveExercise(parentRow);
-        })
-    })
-}
-
 function fetchRemoveExercise(rowToRemove) {
     const rowId = rowToRemove.getAttribute("data-id");
     fetch(`/home/remove-exercise/${rowId}`, {
@@ -89,10 +84,12 @@ function addExerciseRow(exerciseName, newRow) {
     const exerciseCell = document.createElement("td");
     const editableDiv = document.createElement("div");
     const deleteCell = document.createElement("td");
+    exerciseRow.classList.add("exercise-row-added");
     deleteCell.classList.add("remove-btn");
     const deleteImg = document.createElement("img");
     deleteImg.src = removeBtn;
-    deleteCell.appendChild(deleteImg)
+    deleteImg.setAttribute("id", "remove-img");
+    deleteCell.appendChild(deleteImg);
     editableDiv.textContent = exerciseName;
     editableDiv.contentEditable = true;
     editableDiv.classList.add("form-control");
@@ -106,10 +103,9 @@ function addExerciseRow(exerciseName, newRow) {
     exerciseRow.appendChild(exerciseCell);
     exerciseRow.appendChild(deleteCell);
     exerciseCell.appendChild(editableDiv);
-    attachExerciseCellEventListeners(editableDiv);
+    attachExerciseCellEventListeners(exerciseRow);
     const tableBody = document.getElementById("exercise-table-body");
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
-    attachExerciseCellEventListeners(editableDiv);
 }
 
 let exerciseEventListenerAttached = false;
