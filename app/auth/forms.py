@@ -22,7 +22,7 @@ class RegistrationForm(FlaskForm):
             return False
         user = User.query.filter_by(username=self.username.data).first()
         if user:
-            self.username.errors.append("Username is already registered")
+            self.username.errors.append("Username is already taken")
             return False
         return True
 

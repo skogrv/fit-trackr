@@ -25,7 +25,7 @@ def signup():
         login_user(user)
         flash("Registered", "success")
         return redirect(url_for("core.home"))
-    return render_template("auth/signup.html", form=form, is_signup_page = True)
+    return render_template("auth/signup.html", form=form, is_signup_page=True)
 
 
 @auth_bp.route("/login", methods=["GET", "POST"])
@@ -38,7 +38,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         login_user(user)
         return redirect(url_for("core.home"))
-    return render_template("auth/login.html", form=form, is_login_page = True)
+    return render_template("auth/login.html", form=form, is_login_page=True)
 
 
 @auth_bp.route("/logout")
