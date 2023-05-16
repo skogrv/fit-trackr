@@ -3,31 +3,33 @@
 Login
 {% endblock %}
 {% block content %}
-<div class="login-form">
-    <form action="/login" method="post">
-        {{ form.csrf_token }}
-        <h2 class="text-center">Log in</h2>
-        <div id="error-container">
-        {% for field, errors in form.errors.items() %}
-        {% for error in errors %}
-        <div class="alert alert-danger error-message">{{ error }}</div>
-        {% endfor %}
-        {% endfor %}
+<div class="login-container">
+    <div class="login-form">
+        <form action="/login" method="post">
+            {{ form.csrf_token }}
+            <h2 class="text-center">Log in</h2>
+            <div id="error-container">
+                {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                <div class="alert alert-danger error-message">{{ error }}</div>
+                {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.username(class="form-control", placeholder="Username") }}
+            </div>
+            <div class="form-group">
+                {{ form.password(class="form-control", placeholder="Password") }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </div>
+            <div class="clearfix">
+                <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                <a href="#" class="pull-right">Forgot Password?</a>
+            </div>
+        </form>
+        <p class="text-center"><a href="{{ url_for('auth.signup') }}">Create an Account</a></p>
     </div>
-        <div class="form-group">
-            {{ form.username(class="form-control", placeholder="Username") }}
-        </div>
-        <div class="form-group">
-            {{ form.password(class="form-control", placeholder="Password") }}
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
-        </div>
-        <div class="clearfix">
-            <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-            <a href="#" class="pull-right">Forgot Password?</a>
-        </div>
-    </form>
-    <p class="text-center"><a href="{{ url_for('auth.signup') }}">Create an Account</a></p>
 </div>
 {% endblock %}

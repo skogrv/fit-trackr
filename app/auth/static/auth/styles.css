@@ -2,14 +2,19 @@
 
 .container-fluid {
     display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 4.6em);
+}
+
+.login-container, .sign-up-container {
+    display: flex;
+    flex-grow: 1;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 4.7em)
 }
 
 .login-form {
     width: 22rem;
-    margin:auto;
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 30px;

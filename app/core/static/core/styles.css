@@ -1,10 +1,19 @@
 @import url('/static/site.css');
 
-#exercise-table-body td {
+#exercise-table-body td tr {
     position: relative;
     padding: 0.7rem 0.5rem;
     border-top: 1px solid;
     border-color: inherit;
+}
+
+#exercise-table-header {
+    vertical-align: middle;
+    height: 3.4em;
+}
+
+.exercise-btn {
+    margin-right: 3px;
 }
 
 .form-control {
@@ -25,12 +34,12 @@
 .remove-btn {
     width: 8%;
     text-align: end;
+    border-top-width: 1px;
 }
 
 #header-btn {
-    display: flex;
-    justify-content: end;
-    border-bottom: 0;
+    text-align: end;
+    border-bottom-width: 1px;
 }
 
 table tr {
