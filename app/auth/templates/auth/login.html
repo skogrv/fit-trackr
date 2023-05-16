@@ -7,7 +7,7 @@ Login
     <form action="/login" method="post">
         {{ form.csrf_token }}
         <h2 class="text-center">Log in</h2>
-        <div id="error-container" style="height: 3.5em;">
+        <div id="error-container">
         {% for field, errors in form.errors.items() %}
         {% for error in errors %}
         <div class="alert alert-danger error-message">{{ error }}</div>
