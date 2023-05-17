@@ -113,7 +113,7 @@ let exerciseEventListenerAttached = false;
 
 function createInputForm() {
     const exerciseForm = document.querySelector("#add-exercise-form");
-    const exerciseRow = document.querySelector(".exercise-row");
+    const exerciseRow = document.querySelector("#exercise-row-input");
     const exerciseInput = document.querySelector("#exercise");
     exerciseRow.style.display = "table-row";
 
@@ -169,7 +169,7 @@ function saveExercise(exerciseName, exerciseForm) {
     })
         .then(response => {
             if (response.ok) {
-                const inputRow = document.querySelector(".exercise-row");
+                const inputRow = document.querySelector("#exercise-row-input");
                 addExerciseRow(exerciseName, inputRow);
             }
             else {

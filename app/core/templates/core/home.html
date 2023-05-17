@@ -13,7 +13,7 @@ Welcome
                 </tr>
               </thead>
             <tbody id="exercise-table-body">
-                <tr class="exercise-row">
+                <tr id="exercise-row-input">
                     <td id="exercise-data" colspan="2">
                         <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
                             {{ form.csrf_token }}
