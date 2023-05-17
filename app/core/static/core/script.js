@@ -130,7 +130,14 @@ function createInputForm() {
         });
         exerciseInput.addEventListener("blur", (event) => {
             if (!event.relatedTarget || !(event.relatedTarget.nodeName == "BUTTON")) {
-                removeInputForm();
+                if (exerciseInput.value !== "") {
+                    saveExercise(exerciseInput.value, exerciseForm);
+                    exerciseInput.value = "";
+                    exerciseInput.focus();
+                }
+                else {
+                    removeInputForm();
+                }
             }
         })
         exerciseEventListenerAttached = true;
