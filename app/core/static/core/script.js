@@ -129,14 +129,7 @@ function createInputForm() {
         });
         exerciseInput.addEventListener("blur", (event) => {
             if (!event.relatedTarget || !(event.relatedTarget.nodeName == "BUTTON")) {
-                if (exerciseInput.value === "") {
-                    removeInputForm();
-                }
-                else {
-                    exerciseRow.style.display = "table-row";
-                    saveExercise(exerciseInput.value, exerciseForm);
-                    exerciseInput.focus()
-                }
+                removeInputForm();
             }
         })
         exerciseEventListenerAttached = true;
