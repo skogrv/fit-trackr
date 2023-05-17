@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const exercises = document.querySelectorAll(".exercise-row-added");
     exercises.forEach(attachExerciseCellEventListeners);
-    addExercise();
+    attachButtonEventListener();
 })
 
 function attachExerciseCellEventListeners(exercise) {
@@ -14,7 +14,7 @@ function attachExerciseCellEventListeners(exercise) {
                 editExercise(editableData, rowId);
             }
         })
-        editableData.addEventListener("blur", (event) => {
+        editableData.addEventListener("blur", () => {
             editExercise(editableData, rowId);
         })
     })
@@ -22,11 +22,11 @@ function attachExerciseCellEventListeners(exercise) {
         const clickedImg = event.target;
         const parentRow = clickedImg.parentNode.parentNode;
         parentRow.remove()
-        fetchRemoveExercise(parentRow);
+        removeExercise(parentRow);
     })
 }
 
-function addExercise() {
+function attachButtonEventListener() {
     const exerciseBtn = document.querySelector(".exercise-btn")
 
     exerciseBtn.addEventListener("click", function () {
@@ -57,9 +57,10 @@ function editExercise(cell, rowId) {
                 console.log("Failed to update");
             }
         })
+        .catch(error => console.log(error))
 }
 
-function fetchRemoveExercise(rowToRemove) {
+function removeExercise(rowToRemove) {
     const rowId = rowToRemove.getAttribute("data-id");
     fetch(`/home/remove-exercise/${rowId}`, {
         method: "DELETE",
