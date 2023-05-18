@@ -7,24 +7,24 @@ Welcome
     <div class="col rounded border p-0">
         <table class="table m-0">
             <thead>
-                <tr id="exercise-table-header">
+                <tr id="workout-table-header">
                   <th scope="col"><h3 class="m-0">Workouts</h2></th>
                   <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm workout-btn">Add</button></th>
                 </tr>
               </thead>
-            <tbody id="exercise-table-body">
-                <tr id="exercise-row-input">
-                    <td id="exercise-data" colspan="2">
-                        <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
-                            {{ form.csrf_token }}
-                            {{ form.exercise(class="form-control") }}
+            <tbody id="workout-table-body">
+                <tr id="workout-row-input" class="row-input">
+                    <td id="workout-data" colspan="2">
+                        <form id="add-workout-form" method="POST" action="{{ url_for('core.save_workout') }}">
+                            {{ workout_form.csrf_token }}
+                            {{ workout_form.workout(class="form-control") }}
                         </form>
                     </td>
                 </tr>
-                {% for exercise in exercises %}
-                <tr class="exercise-row-added" data-id="{{ exercise.id }}">
+                {% for workout in workouts %}
+                <tr class="workout-row-added" data-id="{{ workout.id }}">
                     <td>
-                        <div contenteditable="true" class="form-control editable-td">{{ exercise.name }}</div>
+                        <div contenteditable="true" class="form-control editable-td">{{ workout.name }}</div>
                     </td>                    
                     <td class="remove-btn"><img class="remove-img" src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>
@@ -43,11 +43,11 @@ Welcome
                 </tr>
               </thead>
             <tbody id="exercise-table-body">
-                <tr id="exercise-row-input">
+                <tr id="exercise-row-input" class="row-input">
                     <td id="exercise-data" colspan="2">
                         <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
-                            {{ form.csrf_token }}
-                            {{ form.exercise(class="form-control") }}
+                            {{ exercise_form.csrf_token }}
+                            {{ exercise_form.exercise(class="form-control") }}
                         </form>
                     </td>
                 </tr>

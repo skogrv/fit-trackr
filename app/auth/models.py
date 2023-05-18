@@ -13,6 +13,8 @@ class User(UserMixin, db.Model):
 
     exercises = db.relationship(
         'app.core.models.Exercise', back_populates='user')
+    workouts = db.relationship(
+        'app.core.models.Workout', back_populates='user')
 
     def __init__(self, username, password):
         self.username = username
