@@ -14,7 +14,7 @@
 
 <body>
     <navbar>{% include "navigation.html" %}</navbar>
-    <main class="container-fluid p-0">
+    <main class="container-fluid p-0 d-flex flex-column">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class="flash-messages">

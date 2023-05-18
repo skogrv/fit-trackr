@@ -28,6 +28,7 @@ function attachExerciseCellEventListeners(exercise) {
 
 function attachButtonEventListener() {
     const exerciseBtn = document.querySelector(".exercise-btn")
+    
 
     exerciseBtn.addEventListener("click", function () {
         if (exerciseBtn.textContent == "Add") {

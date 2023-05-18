@@ -3,7 +3,37 @@
 Welcome
 {% endblock %}
 {% block content %}
-<div class="row m-3">
+<div class="row m-3 flex-grow-1">
+    <div class="col rounded border p-0">
+        <table class="table m-0">
+            <thead>
+                <tr id="exercise-table-header">
+                  <th scope="col"><h3 class="m-0">Workouts</h2></th>
+                  <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm workout-btn">Add</button></th>
+                </tr>
+              </thead>
+            <tbody id="exercise-table-body">
+                <tr id="exercise-row-input">
+                    <td id="exercise-data" colspan="2">
+                        <form id="add-exercise-form" method="POST" action="{{ url_for('core.save_exercise') }}">
+                            {{ form.csrf_token }}
+                            {{ form.exercise(class="form-control") }}
+                        </form>
+                    </td>
+                </tr>
+                {% for exercise in exercises %}
+                <tr class="exercise-row-added" data-id="{{ exercise.id }}">
+                    <td>
+                        <div contenteditable="true" class="form-control editable-td">{{ exercise.name }}</div>
+                    </td>                    
+                    <td class="remove-btn"><img class="remove-img" src="{{ url_for('.static', filename='core/remove.png') }}"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row m-3 flex-grow-1">
     <div class="col rounded border p-0">
         <table class="table m-0">
             <thead>
