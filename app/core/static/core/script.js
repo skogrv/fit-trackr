@@ -32,7 +32,6 @@ function attachExerciseCellEventListeners(exercise, targetTable) {
 }
 
 function attachButtonEventListener(button, targetTable) {
-
     button.addEventListener("click", () => {
         if (button.textContent == "Add") {
             createInputForm(targetTable);
@@ -109,28 +108,41 @@ function addExerciseRow(exerciseName, newRow, targetTable) {
     exerciseRow.appendChild(exerciseCell);
     exerciseRow.appendChild(deleteCell);
     exerciseCell.appendChild(editableDiv);
-    attachExerciseCellEventListeners(exerciseRow);
+    attachExerciseCellEventListeners(exerciseRow, targetTable);
     const tableBody = document.getElementById(`${targetTable}-table-body`);
     tableBody.insertBefore(exerciseRow, newRow.nextSibling);
 }
 
-let exerciseEventListenerAttached = false;
+let activeTableInput;
 
 function createInputForm(targetTable) {
     const exerciseForm = document.querySelector(`#add-${targetTable}-form`);
     const exerciseRow = document.querySelector(`#${targetTable}-row-input`);
     const exerciseInput = document.querySelector(`#${targetTable}`);
     exerciseRow.style.display = "table-row";
+    
 
     changeButton("X", targetTable)
     exerciseInput.focus();
-    if (!exerciseEventListenerAttached) {
+    console.log(exerciseInput)
+    console.log(activeTableInput)
+    const eventListenerAttached = exerciseInput.getAttribute("data-event-listener");
+    if (activeTableInput && activeTableInput !== exerciseInput) {
+        console.log("HERE")
+        removeActiveForm(activeTableInput.name)
+    }
+
+    exerciseInput.setAttribute("data-active-input", "true");
+    activeTableInput = exerciseInput;
+
+
+    if (eventListenerAttached !== "true") {
+        exerciseInput.setAttribute("data-event-listener", "true");
         exerciseInput.addEventListener("keypress", function (event) {
             if (event.key === "Enter" || event.key === "Return") {
                 exerciseRow.style.display = "table-row";
-                console.log(exerciseInput.value)
-                saveExercise(exerciseInput.value, exerciseForm, targetTable);
                 event.preventDefault();
+                saveExercise(exerciseInput.value, exerciseForm, targetTable);
             }
         });
         exerciseInput.addEventListener("blur", (event) => {
@@ -141,14 +153,22 @@ function createInputForm(targetTable) {
                     exerciseInput.focus();
                 }
                 else {
+                    exerciseInput.value = "";
                     removeInputForm(targetTable);
                 }
             }
         })
-        exerciseEventListenerAttached = true;
     }
 }
 
+function removeActiveForm(targetTable) {
+    const activeInput = document.querySelector('[data-active-input="true"]');
+    if (activeInput) {
+        activeInput.closest("tr").style.display = "none"
+        activeInput.removeAttribute("data-active-input");
+        changeButton("Add", targetTable)
+    }
+}
 
 function removeInputForm(targetTable) {
     const inputField = document.querySelector(`#${targetTable}-table-body`);
@@ -172,23 +192,28 @@ function changeButton(toChange, targetTable) {
 }
 
 function saveExercise(exerciseName, exerciseForm, targetTable) {
-    const formData = new FormData(exerciseForm);
+    const formData = new URLSearchParams();
+
+    for (const field of exerciseForm.elements) {
+        const fieldName = field.name;
+        const fieldValue = field.value;
+        formData.append(fieldName, fieldValue);
+    }
+
     fetch(exerciseForm.action, {
         method: 'POST',
         body: formData,
         headers: {
-            "X-CSRFToken": "{{ csrf_token() }}"
+            "Content-Type": "application/x-www-form-urlencoded",
         }
-    })
+    })  
         .then(response => {
             if (response.ok) {
                 const inputRow = document.querySelector(`#${targetTable}-row-input`);
                 addExerciseRow(exerciseName, inputRow, targetTable);
             }
             else {
-                return response.json().then(data => {
-                    throw new Error(data.errors.exercise[0]);
-                });
+                throw new Error(data.errors.exercise[0]);
             }
         })
         .catch(error => console.log(error))

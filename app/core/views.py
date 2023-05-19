@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, jsonify
+from flask import Blueprint, render_template, redirect, request, jsonify, make_response
 from flask_login import login_required, current_user
 from app import db
 from .forms import ExerciseForm, WorkoutForm
@@ -40,7 +40,7 @@ def save_workout():
         db.session.add(workout)
         db.session.commit()
 
-        return jsonify({'success': True, 'exercise_name': form.workout.data}), 200
+        return(jsonify({'success': True, 'workout_name': form.workout.data}), 200)
     else:
         return jsonify({'success': False, 'errors': form.errors}), 400
 
