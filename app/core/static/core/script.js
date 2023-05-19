@@ -124,11 +124,8 @@ function createInputForm(targetTable) {
 
     changeButton("X", targetTable)
     exerciseInput.focus();
-    console.log(exerciseInput)
-    console.log(activeTableInput)
     const eventListenerAttached = exerciseInput.getAttribute("data-event-listener");
     if (activeTableInput && activeTableInput !== exerciseInput) {
-        console.log("HERE")
         removeActiveForm(activeTableInput.name)
     }
 
