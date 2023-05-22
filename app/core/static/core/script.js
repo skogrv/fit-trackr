@@ -120,7 +120,7 @@ function createInputForm(targetTable) {
     const exerciseRow = document.querySelector(`#${targetTable}-row-input`);
     const exerciseInput = document.querySelector(`#${targetTable}`);
     exerciseRow.style.display = "table-row";
-    
+
 
     changeButton("X", targetTable)
     exerciseInput.focus();
@@ -131,7 +131,6 @@ function createInputForm(targetTable) {
 
     exerciseInput.setAttribute("data-active-input", "true");
     activeTableInput = exerciseInput;
-
 
     if (eventListenerAttached !== "true") {
         exerciseInput.setAttribute("data-event-listener", "true");
@@ -169,9 +168,17 @@ function removeActiveForm(targetTable) {
 
 function removeInputForm(targetTable) {
     const inputField = document.querySelector(`#${targetTable}-table-body`);
+    const exerciseForm = document.querySelector(`#add-${targetTable}-form`);
+
     const tableRow = inputField.children[0];
     tableRow.style.display = "none";
+    exerciseForm.reset()
+
     changeButton("Add", targetTable);
+}
+
+function emptyInputField(inputField) {
+    inputField.value = "";
 }
 
 function changeButton(toChange, targetTable) {
@@ -203,7 +210,7 @@ function saveExercise(exerciseName, exerciseForm, targetTable) {
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         }
-    })  
+    })
         .then(response => {
             if (response.ok) {
                 const inputRow = document.querySelector(`#${targetTable}-row-input`);
