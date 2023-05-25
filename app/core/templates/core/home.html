@@ -3,15 +3,17 @@
 Welcome
 {% endblock %}
 {% block content %}
-<div class="row m-3 flex-grow-1">
+<div class="wrapper row m-3 flex-grow-1">
     <div class="col rounded border p-0">
         <table class="table m-0">
             <thead>
                 <tr id="workout-table-header">
-                  <th scope="col"><h3 class="m-0">Workouts</h2></th>
-                  <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm workout-btn">Add</button></th>
+                    <th scope="col">
+                        <h3 class="m-0">Workouts</h2>
+                    </th>
+                    <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm workout-btn">Add</button></th>
                 </tr>
-              </thead>
+            </thead>
             <tbody id="workout-table-body">
                 <tr id="workout-row-input" class="row-input">
                     <td id="workout-data" colspan="2">
@@ -25,23 +27,27 @@ Welcome
                 <tr class="workout-row-added" data-id="{{ workout.id }}">
                     <td>
                         <div contenteditable="true" class="form-control editable-td">{{ workout.name }}</div>
-                    </td>                    
-                    <td class="remove-btn"><img class="remove-img" src="{{ url_for('.static', filename='core/remove.png') }}"></td>
+                    </td>
+                    <td class="remove-btn"><img class="remove-img"
+                            src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
-<div class="row m-3 flex-grow-1">
+<div class="wrapper row m-3 flex-grow-1">
     <div class="col rounded border p-0">
         <table class="table m-0">
             <thead>
                 <tr id="exercise-table-header">
-                  <th scope="col"><h3 class="m-0">Exercises</h2></th>
-                  <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm exercise-btn">Add</button></th>
+                    <th scope="col">
+                        <h3 class="m-0">Exercises</h2>
+                    </th>
+                    <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm exercise-btn">Add</button>
+                    </th>
                 </tr>
-              </thead>
+            </thead>
             <tbody id="exercise-table-body">
                 <tr id="exercise-row-input" class="row-input">
                     <td id="exercise-data" colspan="2">
@@ -55,8 +61,9 @@ Welcome
                 <tr class="exercise-row-added" data-id="{{ exercise.id }}">
                     <td>
                         <div contenteditable="true" class="form-control editable-td">{{ exercise.name }}</div>
-                    </td>                    
-                    <td class="remove-btn"><img class="remove-img" src="{{ url_for('.static', filename='core/remove.png') }}"></td>
+                    </td>
+                    <td class="remove-btn"><img class="remove-img"
+                            src="{{ url_for('.static', filename='core/remove.png') }}"></td>
                 </tr>
                 {% endfor %}
             </tbody>

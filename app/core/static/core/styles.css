@@ -45,3 +45,8 @@
 table tr {
     white-space: nowrap;
 }
+
+div.wrapper {
+    height: 42vh;
+    overflow-y: auto;
+}

@@ -4,14 +4,11 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
-  }
-
-main {
-    height: calc(100vh - 4.6rem);
 }
 
 body {
@@ -94,11 +91,8 @@ a[class="logo"] {
     padding: 0.5em 0.7em;
 }
 
-
 .error {
     color: red;
     margin-bottom: 5px;
     text-align: center;
 }
-
-
