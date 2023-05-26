@@ -1,0 +1,17 @@
+{% extends "core/core_base.html" %}
+{% block title %}
+Welcome
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-6 workout-form">
+        <form>
+        <div class="form-group">
+            {{workout_form.workout(class="form-control")}}
+            {{workout_form.submit(class="workout-form-btn")}}
+        </div>
+    </form>
+    </div>
+</div>
+</div>
+{% endblock %}

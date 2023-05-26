@@ -28,50 +28,12 @@ def index():
         return redirect("/home")
     return render_template("core/index.html")
 
-
-@core_bp.route("/home/save-workout/", methods=["POST"])
+@core_bp.route("/home/create_workout/")
 @login_required
-def save_workout():
-    workout = request.form["workout"]
-    form = WorkoutForm(workout=workout)
-
-    if form.validate_on_submit():
-        workout = Workout(name=workout, user_id=current_user.get_id())
-        db.session.add(workout)
-        db.session.commit()
-
-        return(jsonify({'success': True, 'workout_name': form.workout.data}), 200)
-    else:
-        return jsonify({'success': False, 'errors': form.errors}), 400
-
-
-@core_bp.route("/home/edit-workout/<int:workout_id>", methods=["PUT"])
-@login_required
-def update_workout(workout_id):
-    workout = Workout.query.get(workout_id)
-    if not workout:
-        return jsonify({"success": False, "message": "Exercise not found"})
-    data = request.json
-    new_name = data["name"]
-    form = WorkoutForm(workout=new_name)
-    if form.validate_on_submit():
-        workout.name = new_name
-        db.session.commit()
-        return jsonify({"success": True})
-    else:
-        return jsonify({"success": False, "errors": form.errors})
-
-
-@core_bp.route("/home/remove-workout/<int:workout_id>", methods=["DELETE"])
-@login_required
-def delete_workout(workout_id):
-    workout = Workout.query.filter_by(id=workout_id).delete()
-    if workout:
-        db.session.commit()
-        return jsonify({"success": True}), 204
-    else:
-        return jsonify({"success": False, "errors": "Value does not exists"}), 400
-
+def create_workout():
+    workouts = Workout.query.all()
+    workout_form = WorkoutForm()
+    return render_template("core/create_workout.html", workout_form=workout_form)
 
 @core_bp.route("/home/save-exercise/", methods=["POST"])
 @login_required

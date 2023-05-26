@@ -36,14 +36,6 @@
     margin-bottom: 15px;
 }
 
-.login-form .form-control {
-    height: 40px;
-    font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-}
-
 .login-form .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -87,7 +79,6 @@ input[type="checkbox"] {
     margin-right: 0.2em;
 }
 
-.form-control,
 .btn {
     min-height: 38px;
     border-radius: 2px;

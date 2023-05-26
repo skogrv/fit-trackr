@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     workouts.forEach(workout => attachExerciseCellEventListeners(workout, "workout"));
     const workoutBtn = document.querySelector(".workout-btn");
     const exerciseBtn = document.querySelector(".exercise-btn");
-    attachButtonEventListener(workoutBtn, "workout");
+    // attachButtonEventListener(workoutBtn, "workout");
     attachButtonEventListener(exerciseBtn, "exercise");
 })
 

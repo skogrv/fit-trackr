@@ -11,18 +11,10 @@ Welcome
                     <th scope="col">
                         <h3 class="m-0">Workouts</h2>
                     </th>
-                    <th id="header-btn" scope="col"><button class="btn btn-primary btn-sm workout-btn">Add</button></th>
+                    <th id="header-btn" scope="col"><form action="{{url_for('core.create_workout')}}"><button class="btn btn-primary btn-sm workout-btn">Add</button></form></th>
                 </tr>
             </thead>
             <tbody id="workout-table-body">
-                <tr id="workout-row-input" class="row-input">
-                    <td id="workout-data" colspan="2">
-                        <form id="add-workout-form" method="POST" action="{{ url_for('core.save_workout') }}">
-                            {{ workout_form.csrf_token }}
-                            {{ workout_form.workout(class="form-control") }}
-                        </form>
-                    </td>
-                </tr>
                 {% for workout in workouts %}
                 <tr class="workout-row-added" data-id="{{ workout.id }}">
                     <td>
