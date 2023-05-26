@@ -25,7 +25,10 @@ Login
                 {{ form.submit(class="btn btn-primary btn-block") }}
             </div>
             <div class="clearfix">
-                <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+                <label class="pull-left checkbox-inline"><br>
+                    {{ form.remember_me }}
+                    {{ form.remember_me.label }}
+                </label>
                 <a href="#" class="pull-right">Forgot Password?</a>
             </div>
         </form>

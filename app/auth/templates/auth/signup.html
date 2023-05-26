@@ -30,7 +30,10 @@ Signup
                 {{ form.submit(class="btn btn-primary btn-block") }}
             </div>
             <div class="clearfix">
-                <label class="pull-left checkbox-inline"><input type="checkbox">Remember me</label><br>
+                <label class="pull-left checkbox-inline"><br>
+                    {{ form.remember_me }}
+                    {{ form.remember_me.label }}
+                </label>
             </div>
         </form>
         <p class="text-center"><a href="{{ url_for('auth.login') }}">Login</a></p>

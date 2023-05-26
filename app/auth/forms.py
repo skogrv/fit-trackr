@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, EqualTo
 from .models import User
 from app import bcrypt
@@ -16,6 +16,7 @@ class RegistrationForm(FlaskForm):
                             DataRequired(), EqualTo('password', message='Passwords must match'
                                                                  )])
     submit = SubmitField()
+    remember_me = BooleanField("Remember me")
 
     def validate(self, extra_validators=None):
         initial_validation = super(RegistrationForm, self).validate()
@@ -32,6 +33,7 @@ class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Log in")
+    remember_me = BooleanField("Remember me")
 
     def validate(self, extra_validators=None):
         initial_validation = super(LoginForm, self).validate()
