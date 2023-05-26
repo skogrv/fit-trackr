@@ -1,7 +1,11 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, validators
+from wtforms import StringField, PasswordField, SubmitField, SelectMultipleField, validators, widgets
 from wtforms.validators import DataRequired, Length, EqualTo
+from wtforms_alchemy import QuerySelectMultipleField
 
+class QuerySelectMultipleFieldWithCheckboxes(QuerySelectMultipleField):
+    widget = widgets.ListWidget(prefix_label=False)
+    option_widget = widgets.CheckboxInput()
 
 class ExerciseForm(FlaskForm):
     exercise = StringField('Exercise', validators=[DataRequired(),
@@ -15,6 +19,6 @@ class ExerciseForm(FlaskForm):
         return True
     
 class WorkoutForm(FlaskForm):
-    workout = StringField('Workout', validators=[DataRequired(),
-    ])
+    workout = StringField('Workout', validators=[DataRequired()])
+    exercises = QuerySelectMultipleFieldWithCheckboxes("Exercises")
     submit = SubmitField('Add')

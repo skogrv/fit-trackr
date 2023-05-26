@@ -31,8 +31,8 @@ def index():
 @core_bp.route("/home/create_workout/")
 @login_required
 def create_workout():
-    workouts = Workout.query.all()
     workout_form = WorkoutForm()
+    workout_form.exercises.query = Exercise.query.all()
     return render_template("core/create_workout.html", workout_form=workout_form)
 
 @core_bp.route("/home/save-exercise/", methods=["POST"])

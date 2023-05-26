@@ -13,6 +13,9 @@ class Exercise(db.Model):
 
     def __repr__(self):
         return f"<name {self.name}>"
+    
+    def __str__(self):
+        return self.name
 
 workout_exercises = db.Table(
     "workout_exercises", 

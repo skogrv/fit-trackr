@@ -3,15 +3,17 @@
 Welcome
 {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-6 workout-form">
+<div class="row m-0">
+    <div class="p-3 workout-form">
         <form>
-        <div class="form-group">
-            {{workout_form.workout(class="form-control")}}
-            {{workout_form.submit(class="workout-form-btn")}}
-        </div>
-    </form>
+            <div class="form-group">
+                {{workout_form.csrf_token}}
+                {{workout_form.workout.label}}
+                {{workout_form.workout(class="form-control")}}
+                {{workout_form.exercises}}
+                {{workout_form.submit(class="workout-form-btn")}}
+            </div>
+        </form>
     </div>
-</div>
 </div>
 {% endblock %}

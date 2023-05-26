@@ -50,3 +50,20 @@ div.wrapper {
     height: 42vh;
     overflow-y: auto;
 }
+
+.workout-form-btn {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 4px 14px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#exercises {
+    padding: 0;
+    height: 400px;
+    overflow-y: scroll;
+}
